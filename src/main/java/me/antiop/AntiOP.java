@@ -9,17 +9,34 @@ public class AntiOP extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
         getServer().getPluginManager().registerEvents(this, this);
         getLogger().info("AntiOP enabled!");
     }
 
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent event) {
+        if (!getConfig().getBoolean("enabled")) return;
+
         String cmd = event.getMessage().toLowerCase();
 
-        if (cmd.equals("/op") || cmd.startsWith("/op ")) {
+        if (cmd.equals("/op") || cmd.startsWith("/op ")
+                || cmd.equals("/minecraft:op") || cmd.startsWith("/minecraft:op ")) {
+
+            String bypass = getConfig().getString("bypass-permission");
+
+            if (bypass != null && event.getPlayer().hasPermission(bypass)) {
+                return;
+            }
+
             event.setCancelled(true);
-            event.getPlayer().sendMessage("§cYou cannot use /op!");
+
+            String message = getConfig().getString("message", "&cYou cannot use /op!");
+            event.getPlayer().sendMessage(message.replace("&", "§"));
+
+            if (getConfig().getBoolean("log-attempts")) {
+                getLogger().warning(event.getPlayer().getName() + " tried to use /op.");
+            }
         }
     }
 }
