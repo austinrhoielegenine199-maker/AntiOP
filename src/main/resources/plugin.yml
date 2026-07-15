@@ -1,1 +1,6 @@
-
+name: AntiOP
+version: 1.0
+main: me.antiop.AntiOP
+api-version: '1.21'
+author: ArchiveAustin
+description: Blocks unauthorized use of /op
