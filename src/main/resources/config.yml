@@ -1,0 +1,31 @@
+# ==========================================
+#         AntiOP Configuration
+# ==========================================
+# By ArchiveAustin
+enabled: true
+
+# Message shown to players.
+message: "&cYou cannot use /op!"
+
+# Permission to bypass AntiOP.
+bypass-permission: "antiop.bypass"
+
+# Log attempts in console.
+log-attempts: true
+
+# ==========================================
+# Discord Webhook
+# ==========================================
+
+webhook:
+  enabled: false
+
+  # Paste your Discord webhook URL here.
+  url: ""
+
+  # Embed settings.
+  username: "AntiOP"
+  avatar-url: ""
+
+  # Send the player's IP (recommended false if you care about privacy).
+  include-ip: false
